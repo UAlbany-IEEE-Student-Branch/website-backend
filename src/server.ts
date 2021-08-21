@@ -24,6 +24,7 @@ app.use('/', memberRouter);
 app.use('/', testRouter);
 
 
-app.listen(5000, ()=>{
-        console.log("server is running on<Plug>PeepOpenort 5000");
+app.listen(5000, () => {
+    console.log("server is running on<Plug>PeepOpenort 5000") 
 });
+
