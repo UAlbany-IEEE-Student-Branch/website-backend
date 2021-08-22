@@ -14,15 +14,17 @@ router.get('/events/future', (req, res, next) => {
     res.send("future event");
 });
 
-router.get('/events', cors(), (req: express.Request, res: express.Response ) =>{
+router.get('/events', cors(), async (req: express.Request, res: express.Response) =>{
 
-    eventModel.getAllEvents()
-        .then(events =>{
-            res.json(events);
-        })
-        .catch(err => res.status(500).json({
-            err: err.message
-        }));
+    try {
+        const events = await eventModel.getAllEvents();
+        res.json(events);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            err: error.message,
+        });
+    }
 });
 
 router.get('/events/placeholder', (req, res) => {

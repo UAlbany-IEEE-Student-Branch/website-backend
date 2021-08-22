@@ -3,58 +3,57 @@ import {Members, memberModel} from '../model/members'
 
 const router = express.Router();
 
-router.get('/members/eboard', (req: express.Request, res: express.Response) => {
+router.get('/members/eboard', async (req: express.Request, res: express.Response) => {
     
-    memberModel.getEboardMembers()
-        .then(members => {
-            res.json(members);
-        })
-        .catch(err => res.status(500).json({
-            err: err.message
-        }));
+    try {
+        const members = await memberModel.getEboardMembers();
+        res.json(members);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            error: error.message, 
+        });
+    }
 });
 
 
-router.get('/members/jboard', (req: express.Request, res: express.Response) => {
+router.get('/members/jboard', async (req: express.Request, res: express.Response) => {
 
-    memberModel.getJboardMembers()
-        .then(members => {
-            res.json(members);
-        })
-        .catch(err => res.status(500).json({
-            err: err.message
-        }));
+    try {
+        const members = await memberModel.getJboardMembers();
+        res.json(members);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            error: error.message, 
+        });
+    }
 });
 
-router.get('/members/dboard', (req: express.Request, res: express.Response) =>{
+router.get('/members/dboard', async (req: express.Request, res: express.Response) =>{
     
-    memberModel.getDboardMembers()
-        .then(members => {
-            res.json(members);
-        })
-        .catch(err => res.status(500).json({
-            err: err.message
-        }));
+    try {
+        const members = await memberModel.getDboardMembers();
+        res.json(members);
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({
+            error: error.message, 
+        });
+    }
 });
 
-router.get('/members', (req: express.Request, res: express.Response) => {
-    //console.log(memberModel.getAllMembers());
+router.get('/members', async (req: express.Request, res: express.Response) => {
 
-    memberModel.getAllMembers()
-        .then(members =>{
-		console.log();
-		console.log();
-		console.log();
-		console.log(typeof members);
-		console.log(members.length);
-		console.log(typeof members[1]);
-		console.log(members[1]);
-		res.json(members);
-        })
-        .catch(err => res.status(500).json({
-            err: err.message
-        }));
-
+    try {
+        const members = await memberModel.getAllMembers();
+        res.json(members);
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({
+            error: error.message, 
+        });
+    }
 });
 
 router.get('/members/:year/:name', (req, res)=>{
