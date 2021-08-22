@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
 
 import logger from './config/logger';
 import indexRouter from './routes/index';
@@ -14,7 +15,7 @@ app.use(cors());
 
 app.use(logger);
 app.use(cors());
-app.use(express.static(__dirname))
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 app.use('/', indexRouter);
@@ -25,6 +26,6 @@ app.use('/', testRouter);
 
 
 app.listen(5000, () => {
-    console.log("server is running on<Plug>PeepOpenort 5000") 
+    console.log("server is running on port 5000") 
 });
 
