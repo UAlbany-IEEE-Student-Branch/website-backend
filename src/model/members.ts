@@ -13,27 +13,39 @@ export type Members = {
 }
 
 const getAllMembers = async ()=>{
-    const values = await dbQuery(`SELECT * FROM Members`);
-    console.log("values" + values);
-    return values as Members[];
+    try {
+        const values = await dbQuery(`SELECT * FROM Members`);
+        return values as Members[];
+    } catch (error) {
+        throw error;
+    }
 }
 
 const getEboardMembers = async () => {
-    const values = await dbQuery(`SELECT * FROM Members WHERE role = 'Eboard'`);
-    console.log('eboard ' + values);
-    return values as Members[];
+    try {
+        const values = await dbQuery(`SELECT * FROM Members WHERE role = 'Eboard'`);
+        return values as Members[];
+    } catch (error) {
+        throw error;
+    }
 }
 
 const getJboardMembers = async () => {
-    const values = await dbQuery(`SELECT * FROM Members WHERE role = 'Jboard'`);
-    console.log('jboard ' + values);
-    return values as Members[];
+    try {
+        const values = await dbQuery(`SELECT * FROM Members WHERE role = 'Jboard'`);
+        return values as Members[];
+    } catch (error) {
+        throw error;
+    }
 }
 
 const getDboardMembers = async () => {
-    const values = await dbQuery(`SELECT * FROM Members WHERE role = 'Dboard'`);
-    console.log('dboard ' + values);
-    return values as Members[];
+    try {
+        const values = await dbQuery(`SELECT * FROM Members WHERE role = 'Dboard'`);
+        return values as Members[];
+    } catch (error) {
+        throw error;
+    }
 }
 
 export const memberModel = {

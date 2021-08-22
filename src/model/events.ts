@@ -11,8 +11,12 @@ export type Events ={
 }
 
 const getAllEvents = async () =>{
-    const values = await dbQuery(`SELECT * FROM Events`);
-    return values as Events[];
+    try {
+        const values = await dbQuery(`SELECT * FROM Events`);
+        return values as Events[];
+    } catch (error) {
+        throw error;
+    }
 }
 
 export const eventModel ={

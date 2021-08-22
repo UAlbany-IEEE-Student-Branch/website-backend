@@ -9,8 +9,12 @@ export type Schedule ={
 }
 
 const getAllSchedule = async ()=>{
-    const values = await dbQuery(`SELECT * FROM Schedule`);
-    return values as Schedule[];
+    try {
+        const values = await dbQuery(`SELECT * FROM Schedule`);
+        return values as Schedule[];
+    } catch (error) {
+        throw error;
+    }
 }
 
 export const scheduleModel ={
