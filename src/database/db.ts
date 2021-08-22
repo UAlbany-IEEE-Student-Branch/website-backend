@@ -1,29 +1,28 @@
 import sqlite3 from 'sqlite3';
 
 const DATABASE_FILE: string = './ieee_info.db';
+export const dbQuery = async (query: string, params?: any[]) => {
 
-export const dbQuery = async (query: string, params?: any[]) =>{
-
-    let db = new sqlite3.Database(DATABASE_FILE, (err)=>{
-        if(err){
-            return console.error(err.message);
-        }
-        console.log("Connection to the in-memory SQL");
-    });
-
-    const process = new Promise<any[]>((resolve, reject) =>{
-        console.log('here'); 
-        db.all(query, params, (err, rows) =>{
-            if(err){
+    const process = new Promise<any[]>((resolve, reject) => {
+        let db = new sqlite3.Database(DATABASE_FILE, (err) => {
+            if (err) {
+                console.error(err.message);
                 reject(err);
-            }else{
+            }
+            console.log(`Connection to the in-memory SQL`);
+        });
+
+        db.all(query, params, (err, rows) => {
+            if (err) {
+                reject(err);
+            } else {  
                 resolve(rows);
             }
-        })
+        });
 
-    })
-    .finally(()=>{
-        db.close();
+        db.close(error => {
+            console.log(`DB closed`);
+        });
     });
 
     return process;
